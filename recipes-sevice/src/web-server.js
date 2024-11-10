@@ -30,7 +30,7 @@ app.use(express.json());
     res.json(recipes);
   });
 
-  app.listen(7000, () => {
+  app.listen(process.env.RECIPES_PORT, () => {
     console.log("Server is running on port 7000");
   });
 })();

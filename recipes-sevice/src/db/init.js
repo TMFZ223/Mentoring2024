@@ -3,7 +3,7 @@ const { Sequelize, DataTypes, Model } = require('sequelize');
 module.exports.initDbConnection = async () => {
   const sequelize = new Sequelize({
     dialect: 'postgres',
-    host: 'host.docker.internal',
+    host: process.env.DB_HOST,
     port: 5432,
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,

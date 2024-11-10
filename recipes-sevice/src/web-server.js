@@ -1,8 +1,10 @@
 const { initDbConnection } = require('./db/init.js');
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 (async () => {
   const { RecipesModel } = await initDbConnection();
@@ -26,7 +28,7 @@ app.use(express.json());
 
   app.get("/recipes", async (req, res) => {
     const { page = 0 } = req.query;
-    const recipes = await RecipesModel.findAndCountAll({ limit: 10, offset: page * 10 });
+    const recipes = await RecipesModel.findAndCountAll({ limit: 10, offset: page * 10, order: [['name', 'ASC']] });
     res.json(recipes);
   });
 

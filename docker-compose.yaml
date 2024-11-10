@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   postgres:
-    image: cr.yandex/${REGISTRY_ID}/postgre:latest
+    image: cr.yandex/${REGISTRY_ID}/postgres:latest
     container_name: postgres_container
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres_user}
@@ -44,8 +44,10 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres_user}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_password}
+      DB_HOST: ${DB_HOST:-http://localhost}
+      RECIPES_PORT: ${RECIPES_PORT:-7000}
     ports:
-      - "7000:7000"
+      - ${RECIPES_PORT:-7000}:${RECIPES_PORT:-7000}
     volumes:
       - /usr/src/app/node_modules
     depends_on:

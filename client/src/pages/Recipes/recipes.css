@@ -1,0 +1,26 @@
+.recipe-list__item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  &:not(:last-child) {
+    padding-bottom: 10px;
+    border-bottom: 1px solid white;
+  }
+}
+
+.recipe-list {
+  min-width: 500px;
+  max-width: 900px;
+  height: calc(100vh - 176px);
+  overflow: auto;
+}
+
+.recipe-list__item-image {
+  margin: auto;
+}
+
+.recipes-page__header {
+  height: 40px;
+  padding-bottom: 16px;
+}

@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   postgres:
-    image: cr.yandex/${REGISTRY_ID}/postgres:latest
+    image: ${REGISTRY_URL}postgres:latest
     container_name: postgres_container
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres_user}
@@ -39,12 +39,12 @@ services:
     stdin_open: true
 
   recipes:
-    image: cr.yandex/${REGISTRY_ID}/recipes:${RECIPES_TAG:-1.0.0}
+    image: ${REGISTRY_URL}recipes:${RECIPES_TAG:-1.0.0}
     container_name: recipes
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres_user}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_password}
-      DB_HOST: ${DB_HOST:-http://localhost}
+      DB_HOST: postgres
       RECIPES_PORT: ${RECIPES_PORT:-7000}
     ports:
       - ${RECIPES_PORT:-7000}:${RECIPES_PORT:-7000}

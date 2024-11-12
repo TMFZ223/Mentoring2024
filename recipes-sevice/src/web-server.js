@@ -33,6 +33,6 @@ app.use(cors());
   });
 
   app.listen(process.env.RECIPES_PORT, () => {
-    console.log("Server is running on port 7000");
+    console.log(`Server is running on port ${process.env.RECIPES_PORT}`);
   });
 })();

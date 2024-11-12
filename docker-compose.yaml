@@ -54,6 +54,19 @@ services:
       - postgres
     restart: unless-stopped
 
+  auth:
+    image: ${REGISTRY_URL}auth:${AUTH_TAG:-1.0.0}
+    container_name: auth
+    environment:
+      AUTH_PORT: ${AUTH_PORT:-6000}
+    ports:
+      - ${AUTH_PORT:-6000}:${AUTH_PORT:-6000}
+    volumes:
+      - /usr/src/app/node_modules
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
 
 volumes:
   pgdata:

@@ -7,7 +7,7 @@ import {
   redirect,
 } from "react-router-dom";
 import { Layout } from './Layout.jsx'
-import { Recipes } from './pages';
+import { Recipes, Login } from './pages';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +15,14 @@ const router = createBrowserRouter([
     element: (
       <Layout title="Рецепты">
         <Recipes />
+      </Layout>
+    ),
+  },
+  {
+    path: '/login',
+    element: (
+      <Layout title="Вход">
+        <Login />
       </Layout>
     ),
   },

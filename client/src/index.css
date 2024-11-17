@@ -73,3 +73,7 @@ h1 {
   margin: 32px 0;
   line-height: 56px;
 }
+
+.error {
+  color: #ff0000;
+}

@@ -46,3 +46,13 @@ main {
   height: 100%;
   overflow: hidden;
 }
+
+.app-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  width: calc(100vw - 16px);
+  max-width: 1264px;
+}

@@ -1,6 +1,6 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import './recipes.css'
+import { api } from "../../api"
 
 export const Recipes = () => {
   const [pageData, setPageData] = useState({count: 0, rows: []})
@@ -14,13 +14,10 @@ export const Recipes = () => {
 
     const getData = async () => {
       try {
-        const { data } = await axios(import.meta.env.VITE_RECIPES_URL, { 
+        const { data } = await api(`${import.meta.env.VITE_API_URL}/recipes`, { 
           params: {
             page: pageNumber
           },
-          headers: {
-            'Access-Control-Allow-Origin': null
-          }
         })
 
         setPageData(data)

@@ -11,14 +11,12 @@ app.use(cors());
 const tokens = {}
 
 app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password } = req.query;
 
   if (!username || !password) {
     res.status(400).json({ message: 'Username and password are required' });
     return;
   }
-
-  
 
   try {
     const user = users[username]
@@ -43,7 +41,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/logout", async (req, res) => {
-  const { token } = req.body;
+  const { token } = req.query;
 
   if (!token) {
     res.status(400).json({ message: 'Token is required' });
@@ -61,7 +59,7 @@ app.post("/logout", async (req, res) => {
 });
 
 app.post("/verify", async (req, res) => {
-  const { token } = req.body;
+  const { token } = req.query;
 
   if (!token) {
     res.status(400).json({ message: 'Token is required' });

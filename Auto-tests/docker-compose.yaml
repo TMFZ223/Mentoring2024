@@ -1,0 +1,20 @@
+version: '3.11'
+
+services:
+  api-tests:
+    build:
+      context: .
+    container_name: api-tests-container
+    volumes:
+      - ./Api-tests:/app/Api-tests
+    command: >
+      python -m pytest --alluredir=Api-tests/allure-results Api-tests
+
+  ui-tests:
+    build:
+      context: .
+    container_name: ui-tests-container
+    volumes:
+      - ./Ui-tests:/app/Ui-tests
+    command: >
+      python -m pytest --alluredir=Ui-tests/allure-results Ui-tests

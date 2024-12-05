@@ -39,7 +39,7 @@ services:
     stdin_open: true
 
   recipes:
-    image: ${REGISTRY_URL}recipes:${RECIPES_TAG:-1.0.0}
+    image: ${REGISTRY_URL}recipes:${RECIPES_TAG:-latest}
     container_name: recipes
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres_user}
@@ -55,7 +55,7 @@ services:
     restart: unless-stopped
 
   auth:
-    image: ${REGISTRY_URL}auth:${AUTH_TAG:-1.0.0}
+    image: ${REGISTRY_URL}auth:${AUTH_TAG:-latest}
     container_name: auth
     environment:
       AUTH_PORT: ${AUTH_PORT:-6000}

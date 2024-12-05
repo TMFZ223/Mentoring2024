@@ -66,19 +66,16 @@ app.post("/verify", async (req, res) => {
     return;
   }
 
-  if (!tokens[token]) {
-    res.status(401).json({ message: 'Invalid token' });
-    return;
-  }
-
   try {
     const decoded = jwt.verify(token, secret);
+    const actualToken = tokens[decoded.data.username]
 
-    if (users[decoded.data.username].role === decoded.data.role) {
-      res.json('OK');
-    } else {
+    if (actualToken !== token) {
       res.status(401).json({ message: 'Invalid token' });
+      return;
     }
+
+    res.json('OK');
   } catch (err) {
     console.log(err);
     res.status(401).json({ message: 'Invalid token' });

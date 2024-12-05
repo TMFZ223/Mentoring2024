@@ -18,21 +18,34 @@ app.post("/login", async (req, res) => {
     return;
   }
 
+  const user = users[username]
+
+  if (user?.password !== password) {
+    res.status(401).json({ message: 'Invalid credentials' });
+    return;
+  }
+
+  let token = tokens[username]
+  let isTokenValid
+
+  if (token) {
+    try {
+      jwt.verify(token, secret)
+      isTokenValid = true
+    } catch {
+      isTokenValid = false
+    }
+  }
+
+  if (isTokenValid) {
+    res.json({ token })
+    return
+  }
+  
+
   try {
-    const user = users[username]
-
-    if (user?.password !== password) {
-      res.status(401).json({ message: 'Invalid credentials' });
-      return;
-    }
-
-    let token = tokens[username]
-
-    if (!token) {
-      token = jwt.sign({ exp: Math.floor(Date.now() / 1000) + (60 * 15), data: { username, role: user.role } }, secret)
-      tokens[username] = token
-    }
-
+    token = jwt.sign({ exp: Math.floor(Date.now() / 1000) + (60 * 15), data: { username, role: user.role } }, secret)
+    tokens[username] = token
     res.json({ token });
   } catch (err) {
     console.log(err);
